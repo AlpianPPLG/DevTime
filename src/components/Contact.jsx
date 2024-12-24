@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { Send, Phone, Mail, MapPin } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet";
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import AOS styles
 import "react-toastify/dist/ReactToastify.css";
 
 const ContactSection = () => {
@@ -49,6 +50,11 @@ const ContactSection = () => {
     setIsSubmitting(false);
   };
 
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({ duration: 1000 }); // Set duration for AOS animations
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -68,11 +74,7 @@ const ContactSection = () => {
         <div
           style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center" }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <div data-aos="fade-up">
             <h2
               style={{
                 fontSize: "32px",
@@ -85,14 +87,13 @@ const ContactSection = () => {
             <p
               style={{ fontSize: "20px", color: "#555", marginBottom: "40px" }}
             >
-              Have questions or feedback? Wed love to hear from you!
+              Have questions or feedback? We'd love to hear from you!
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+          <div
+            data-aos="fade-up"
+            data-aos-delay="200"
             style={{
               width: "100%",
               backgroundColor: "#fff",
@@ -170,12 +171,11 @@ const ContactSection = () => {
                 <Send style={{ verticalAlign: "middle" }} />
               </button>
             </form>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+          <div
+            data-aos="fade-up"
+            data-aos-delay="400"
             style={{
               width: "100%",
               backgroundColor: "#fff",
@@ -230,7 +230,7 @@ const ContactSection = () => {
                 <span>123 Web Dev Street, Internet City, 12345</span>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </>

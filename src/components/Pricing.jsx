@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import AOS styles
 import { Check, X } from "lucide-react";
 
 const PricingSection = () => {
@@ -56,26 +57,25 @@ const PricingSection = () => {
     },
   ];
 
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({ duration: 1000 }); // Set duration for AOS animations
+  }, []);
+
   return (
     <section className="bg-gray-100 py-12">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl font-bold mb-2"
-          >
+          <h2 data-aos="fade-up" className="text-4xl font-bold mb-2">
             Choose Your Plan
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+          </h2>
+          <p
+            data-aos="fade-up"
+            data-aos-delay="100"
             className="text-lg text-gray-600"
           >
             Select the perfect plan for your needs. No hidden fees.
-          </motion.p>
+          </p>
           <div className="flex justify-center items-center gap-4 mb-8">
             <span
               className={`cursor-pointer text-lg ${
@@ -102,13 +102,12 @@ const PricingSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {plans.map((plan, index) => (
-            <motion.div
+            <div
               key={plan.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
               className={`bg-white rounded-lg shadow-lg p-6 transition-transform duration-300 hover:shadow-xl relative ${
-                index === 1 ? "border-4 border-indigo-600" : ""
+                plan.isPopular ? "border-4 border-indigo-600" : ""
               }`}
             >
               {plan.isPopular && (
@@ -151,7 +150,7 @@ const PricingSection = () => {
                   ))}
                 </ul>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

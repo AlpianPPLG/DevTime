@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types"; // Import PropTypes
-import { motion } from "framer-motion";
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import AOS styles
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
@@ -61,7 +62,10 @@ const testimonials = [
 ];
 
 const TestimonialCard = ({ testimonial }) => (
-  <div id="testimony" className="bg-white shadow-lg rounded-lg overflow-hidden">
+  <div
+    className="bg-white shadow-lg rounded-lg overflow-hidden"
+    data-aos="fade-up"
+  >
     <div className="p-6">
       <div className="flex items-center mb-4">
         <div className="h-12 w-12 rounded-full bg-gray-300 flex items-center justify-center mr-4">
@@ -130,33 +134,25 @@ const TestimonialSection = () => {
     }
   };
 
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({ duration: 1000 }); // Set duration for AOS animations
+  }, []);
+
   return (
     <section className="bg-gray-50 py-24">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
+        <div data-aos="fade-up" className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4">What Our Customers Say</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Dont just take our word for it. Heres what some of our satisfied
+            Don't just take our word for it. Here's what some of our satisfied
             customers have to say about their experience.
           </p>
-        </motion.div>
+        </div>
 
         <div className="relative">
           {currentTestimonials.map((testimonial) => (
-            <motion.div
-              key={testimonial.id}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.5 }}
-            >
-              <TestimonialCard testimonial={testimonial} />
-            </motion.div>
+            <TestimonialCard key={testimonial.id} testimonial={testimonial} />
           ))}
 
           <div className="flex justify-center mt-8 space-x-4">

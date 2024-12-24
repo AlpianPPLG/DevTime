@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import AOS styles
 
 const About = () => {
   const images = ["/img/office1.jpg", "/img/office2.jpg", "/img/office3.jpg"];
-
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextImage = () => {
@@ -21,13 +22,18 @@ const About = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({ duration: 1000 }); // Set duration for AOS animations
+  }, []);
+
   return (
     <section id="about" className="relative bg-white py-16 md:py-24 lg:py-32">
       {/* Container */}
       <div className="mx-auto max-w-7xl px-5 md:px-10">
         <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
           {/* Text Content */}
-          <div>
+          <div data-aos="fade-up">
             <h2 className="mb-6 text-3xl font-semibold leading-tight text-gray-900 md:text-4xl lg:text-5xl">
               Built for <span className="text-[#1353fe]">Creativity</span>,
               Designed for <span className="text-[#1353fe]">Simplicity</span>
@@ -99,7 +105,10 @@ const About = () => {
           </div>
 
           {/* Image Slider Content */}
-          <div className="relative w-full max-w-[800px] mx-auto">
+          <div
+            className="relative w-full max-w-[800px] mx-auto"
+            data-aos="fade-left"
+          >
             <img
               src={images[currentIndex]}
               alt="About Us"

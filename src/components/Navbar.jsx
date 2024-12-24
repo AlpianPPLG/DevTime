@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for routing
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -11,8 +14,36 @@ const Navbar = () => {
     window.location.reload();
   };
 
+  const handleLoginClick = () => {
+    navigate("/login"); // Navigate to login page
+  };
+
+  const handleSignUpClick = () => {
+    navigate("/signin"); // Navigate to signin page
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolling(true);
+      } else {
+        setIsScrolling(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="bg-white text-black px-4 py-3 sticky top-0 w-full z-50 shadow-lg">
+    <nav
+      className={`bg-white text-black px-4 py-3 sticky top-0 w-full z-50 shadow-lg transition duration-500 ease-in-out ${
+        isScrolling ? "bg-opacity-50" : "bg-opacity-100"
+      }`}
+    >
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
@@ -33,7 +64,7 @@ const Navbar = () => {
             Blog
           </a>
           <a href="#get-started" className="hover:text-purple-500">
-            Get started
+            Get Started
           </a>
           <a href="#testimony" className="hover:text-purple-500">
             Testimonials
@@ -45,18 +76,21 @@ const Navbar = () => {
 
         {/* Login and Sign Up */}
         <div className="hidden md:flex space-x-4 items-center">
-          <a href="#login" className="hover:text-purple-500">
+          <button
+            onClick={handleLoginClick}
+            className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+          >
             Login
-          </a>
-          <a
-            href="#signup"
-            className="bg-purple-500 text-white px-4 py-2 rounded-full hover:bg-purple-600"
+          </button>
+          <button
+            onClick={handleSignUpClick}
+            className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
           >
             Sign Up
-          </a>
+          </button>
         </div>
 
-        {/* Hamburger Icon */}
+        {/* Hamburger Icon for Mobile */}
         <div className="md:hidden">
           <button
             onClick={toggleMenu}
@@ -89,7 +123,7 @@ const Navbar = () => {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M4 6h16M4 12h16m-7 6h7"
+                  d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
             )}
@@ -115,15 +149,18 @@ const Navbar = () => {
           <a href="#contact" className="block px-4 py-2 hover:bg-gray-200">
             Contact Us
           </a>
-          <a href="#login" className="block px-4 py-2 hover:bg-gray-200">
+          <button
+            onClick={handleLoginClick}
+            className="block w-full text-left px-4 py-2 hover:bg-gray-200"
+          >
             Login
-          </a>
-          <a
-            href="#signup"
-            className="block bg-purple-500 text-white px-4 py-2 rounded-full mx-4 mt-2 hover:bg-purple-600"
+          </button>
+          <button
+            onClick={handleSignUpClick}
+            className="block w-full text-left px-4 py-2 hover:bg-gray-200"
           >
             Sign Up
-          </a>
+          </button>
         </div>
       )}
     </nav>

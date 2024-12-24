@@ -1,4 +1,6 @@
-import { motion } from "framer-motion";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import AOS styles
 import {
   PlayCircle,
   ArrowRight,
@@ -59,6 +61,11 @@ export default function GetStartedComplex() {
     },
   ];
 
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({ duration: 1000 }); // Set duration for AOS animations
+  }, []);
+
   return (
     <section
       id="get-started"
@@ -85,12 +92,7 @@ export default function GetStartedComplex() {
 
       <div className="container mx-auto px-4 sm:px-6">
         {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-20"
-        >
+        <div data-aos="fade-up" className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
             The Website You Want{" "}
             <span className="relative">
@@ -121,19 +123,20 @@ export default function GetStartedComplex() {
               View Showreel
             </button>
           </div>
-        </motion.div>
+        </div>
 
         {/* Features Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        <div
+          data-aos="fade-up"
+          data-aos-delay="200"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
         >
           {features.map((feature, index) => (
             <div
               key={index}
               className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
             >
               <div className="h-12 w-12 rounded-lg bg-[#4F46E5]/10 flex items-center justify-center text-[#4F46E5] mb-4">
                 {feature.icon}
@@ -142,30 +145,23 @@ export default function GetStartedComplex() {
               <p className="text-gray-600">{feature.description}</p>
             </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+        <div
+          data-aos="fade-up"
           className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20"
         >
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
-              <motion.h4
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0, count: stat.number }}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                className="text-3xl md:text-4xl font-bold text-[#4F46E5] mb-2"
-              >
+              <h4 className="text-3xl md:text-4xl font-bold text-[#4F46E5] mb-2">
                 {stat.icon}
                 {stat.number}
-              </motion.h4>
+              </h4>
               <p className="text-gray-600">{stat.label}</p>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

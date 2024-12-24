@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const Hero = () => {
   return (
     <section id="home" className="relative">
@@ -5,28 +7,44 @@ const Hero = () => {
       <div className="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32">
         {/* Heading Div */}
         <div className="mx-auto mb-12 w-full max-w-3xl text-center md:mb-16 lg:mb-20">
-          <h1 className="mb-4 text-4xl font-semibold md:text-6xl">
+          <motion.h1
+            className="mb-4 text-4xl font-semibold md:text-6xl"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             The Website You Want Without The{" "}
             <span className="bg-[url('https://assets.website-files.com/63904f663019b0d8edf8d57c/6390526ac2a607693620c97b_Rectangle%2010.svg')] bg-cover bg-center px-4 text-white">
               Dev Time
             </span>
             .
-          </h1>
-          <p className="mx-auto mb-5 max-w-[528px] text-xl text-[#636262] lg:mb-8">
+          </motion.h1>
+          <motion.p
+            className="mx-auto mb-5 max-w-[528px] text-xl text-[#636262] lg:mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam,
             purus sit amet luctus venenatis, lectus
-          </p>
+          </motion.p>
           {/* Button Wrap */}
           <div className="flex justify-center">
-            <a
+            <motion.a
               href="#"
               className="mr-5 inline-block rounded-xl bg-black px-8 py-4 text-center font-semibold text-white [box-shadow:rgb(19,_83,_254)_6px_6px] md:mr-6"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
               Get Started
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="#"
               className="flex max-w-full flex-row items-center justify-center rounded-xl border border-solid border-[#1353fe] px-6 py-3 font-semibold text-[#1353fe] [box-shadow:rgb(19,_83,_254)_6px_6px]"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 300, delay: 0.1 }}
             >
               <img
                 src="https://assets.website-files.com/63904f663019b0d8edf8d57c/63905a575ec39b6784fc687c_Play.svg"
@@ -34,15 +52,18 @@ const Hero = () => {
                 className="mr-2 inline-block w-6"
               />
               <p className="text-black">View Showreel</p>
-            </a>
+            </motion.a>
           </div>
         </div>
         {/* Image Div */}
-        <div className="relative mx-auto h-[400px] md:h-[512px]"    >
-          <img
+        <div className="relative mx-auto h-[400px] md:h-[512px]">
+          <motion.img
             src="https://assets.website-files.com/63904f663019b0d8edf8d57c/63915d247ab06a755ee4aaee_magicpattern-KfFmwa7m5VQ-unsplash.jpg"
             alt=""
             className="inline-block h-full w-full rounded-xl object-cover sm:rounded-2xl"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
           />
           <div className="absolute bottom-0 left-4 right-0 top-4 -z-10 h-full w-full rounded-2xl bg-black"></div>
         </div>

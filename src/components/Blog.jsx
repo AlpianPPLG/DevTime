@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css"; // Import AOS styles
+
 const Blog = () => {
   // Array path gambar blog dan judul serta deskripsi
   const blogPosts = [
@@ -40,6 +44,11 @@ const Blog = () => {
     },
   ];
 
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({ duration: 1000 }); // Set duration for AOS animations
+  }, []);
+
   return (
     <section id="blog" className="relative bg-gray-50 py-16 md:py-24 lg:py-32">
       {/* Container */}
@@ -61,6 +70,7 @@ const Blog = () => {
             <div
               key={index}
               className="group overflow-hidden rounded-lg bg-white shadow-lg transition-transform duration-300 hover:-translate-y-2"
+              data-aos="fade-up" // Add AOS attribute here
             >
               <img
                 src={post.image} // Menggunakan path dari array
