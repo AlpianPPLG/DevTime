@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for routing
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -15,20 +15,16 @@ const Navbar = () => {
   };
 
   const handleLoginClick = () => {
-    navigate("/login"); // Navigate to login page
+    navigate("/login");
   };
 
   const handleSignUpClick = () => {
-    navigate("/signin"); // Navigate to signin page
+    navigate("/signin");
   };
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsScrolling(true);
-      } else {
-        setIsScrolling(false);
-      }
+      setIsScrolling(window.scrollY > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -133,34 +129,57 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white text-black mt-3">
-          <a href="#about" className="block px-4 py-2 hover:bg-gray-200">
-            About
-          </a>
-          <a href="#blog" className="block px-4 py-2 hover:bg-gray-200">
-            Blog
-          </a>
-          <a href="#get-started" className="block px-4 py-2 hover:bg-gray-200">
-            Get Started
-          </a>
-          <a href="#testimony" className="block px-4 py-2 hover:bg-gray-200">
-            Testimonials
-          </a>
-          <a href="#contact" className="block px-4 py-2 hover:bg-gray-200">
-            Contact Us
-          </a>
-          <button
-            onClick={handleLoginClick}
-            className="block w-full text-left px-4 py-2 hover:bg-gray-200"
-          >
-            Login
-          </button>
-          <button
-            onClick={handleSignUpClick}
-            className="block w-full text-left px-4 py-2 hover:bg-gray-200"
-          >
-            Sign Up
-          </button>
+        <div
+          className="md:hidden bg-white text-black mt-3 transition-opacity duration-500 ease-in-out"
+          style={{
+            transition: "height 0.5s ease-in-out",
+            height: isOpen ? "300px" : "0",
+          }}
+        >
+          <div className="flex flex-col">
+            <a
+              href="#about"
+              className="block px-4 py-2 hover:bg-gray-200 transition duration-300 ease-in-out"
+            >
+              About
+            </a>
+            <a
+              href="#blog"
+              className="block px-4 py-2 hover:bg-gray-200 transition duration-300 ease-in-out"
+            >
+              Blog
+            </a>
+            <a
+              href="#get-started"
+              className="block px-4 py-2 hover:bg-gray-200 transition duration-300 ease-in-out"
+            >
+              Get Started
+            </a>
+            <a
+              href="#testimony"
+              className="block px-4 py-2 hover:bg-gray-200 transition duration-300 ease-in-out"
+            >
+              Testimonials
+            </a>
+            <a
+              href="#contact"
+              className="block px-4 py-2 hover:bg-gray-200 transition duration-300 ease-in-out"
+            >
+              Contact Us
+            </a>
+            <button
+              onClick={handleLoginClick}
+              className="block w-full text-left px-4 py-2 hover:bg-gray-200 transition duration-300 ease-in-out"
+            >
+              Login
+            </button>
+            <button
+              onClick={handleSignUpClick}
+              className="block w-full text-left px-4 py-2 hover:bg-gray-200 transition duration-300 ease-in-out"
+            >
+              Sign Up
+            </button>
+          </div>
         </div>
       )}
     </nav>
